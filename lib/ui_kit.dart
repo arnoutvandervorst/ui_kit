@@ -27,6 +27,7 @@ export 'src/custom_filled_icon_button.dart';
 export 'src/custom_grid_view_builder.dart';
 export 'src/custom_help_bottom_sheet.dart';
 export 'src/custom_icon_badge.dart';
+export 'src/custom_icon_block.dart';
 export 'src/custom_keyboard_unfocus.dart';
 export 'src/custom_list_view.dart';
 export 'src/custom_list_view_builder.dart';

@@ -2,6 +2,10 @@
 
 All notable changes to this package. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the package uses [semantic versioning](https://semver.org/) (pre-1.0: a minor bump may break the API). Each version is a git tag (`vX.Y.Z`) with a GitHub release.
 
+## [0.2.0] - 2026-11-26
+### Added
+- `CustomIconBlock`: an icon on a rounded square in a `UiAccent`'s colour (default 44 px, radius `kControlRadius`), decorative for screen readers.
+
 ## [0.1.1] - 2026-11-26
 ### Fixed
 - The enum picker opens on the chosen row also when it lies far below the fold: the list jumps near it first (the rows are built lazily), then brings it in view.
@@ -18,5 +22,6 @@ All notable changes to this package. The format follows [Keep a Changelog](https
 - Widgets: animated list, grid and page views; empty, error, denied and loading columns; empty state; bottom-sheet body, help and OK sheets; confirm choice; choice chip; segmented control and segment button; filled icon button and icon badge; busy label; progress indicator; keyboard unfocus; null container; text body.
 - The enum picker (`customEnumPicker`, `CustomEnumPickerSheet`, `CustomEnumOption`, `CustomEnumPickerTile`): every choice as a row with a line of explanation; up to 7 choices the sheet fits the list, from 8 it grows up to 90% and scrolls to the chosen row, from 15 it adds search with a match count and group headings.
 
+[0.2.0]: https://github.com/arnoutvandervorst/ui_kit/releases/tag/v0.2.0
 [0.1.1]: https://github.com/arnoutvandervorst/ui_kit/releases/tag/v0.1.1
 [0.1.0]: https://github.com/arnoutvandervorst/ui_kit/releases/tag/v0.1.0
