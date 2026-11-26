@@ -27,7 +27,7 @@ dependencies:
   ui_kit:
     git:
       url: https://github.com/arnoutvandervorst/ui_kit.git
-      ref: v0.1.0
+      ref: v0.1.1
 ```
 
 ```dart

@@ -115,4 +115,20 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('16 OF 16'), findsOneWidget);
   });
+
+  testWidgets('a tall list opens on a chosen row far below the fold', (tester) async {
+    tester.view.physicalSize = const Size(400, 640);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final items = make(14);
+    await open(tester, items, items[13]);
+    await tester.pumpAndSettle();
+    expect(find.text('Item 13').hitTestable(), findsOneWidget);
+  });
+
+  test('a mark from folding never runs past the title', () {
+    expect(matchIn('İstanbul', 'stan'), isNotNull);
+    final hit = matchIn('İs', 's')!;
+    expect(hit.end, greaterThan('İs'.length - 1));
+  });
 }

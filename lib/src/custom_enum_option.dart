@@ -28,7 +28,11 @@ class CustomEnumOption extends StatelessWidget {
     final text = context.textTheme;
     final ink = selected ? tokens.surface : tokens.ink;
     final titleStyle = text.titleMedium?.copyWith(color: ink);
-    final hit = match;
+    //* Folding can change a string's length (İ): keep the mark inside the title.
+    final raw = match;
+    final hit = raw == null || raw.start >= title.length
+        ? null
+        : (start: raw.start, end: raw.end.clamp(raw.start, title.length));
     return Semantics(
       selected: selected,
       button: true,

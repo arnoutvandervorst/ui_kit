@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show debugPrint;
+
 /// The words the Custom widgets show. The app fills them from its own
 /// translations ([UiKit.strings]); the defaults are English.
 class UiStrings {
@@ -53,8 +55,23 @@ String _noMatch(String query) => 'Nothing found for "$query".';
 
 abstract final class UiKit {
   static UiStrings Function() _strings = () => const UiStrings();
+  static bool _configured = false;
+  static bool _warned = false;
 
-  static UiStrings get strings => _strings();
+  static UiStrings get strings {
+    //* In debug, say once that nobody set the words: the English defaults show.
+    assert(() {
+      if (!_configured && !_warned) {
+        _warned = true;
+        debugPrint('ui_kit: UiKit.strings was never set; the widgets show the English defaults.');
+      }
+      return true;
+    }());
+    return _strings();
+  }
 
-  static set strings(UiStrings Function() resolve) => _strings = resolve;
+  static set strings(UiStrings Function() resolve) {
+    _strings = resolve;
+    _configured = true;
+  }
 }

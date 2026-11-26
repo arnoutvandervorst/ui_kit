@@ -11,6 +11,9 @@ import 'package:ui_kit/src/ui_strings.dart';
 /// whole, longer ones grow the sheet up to 90% and scroll, opening on the chosen row,
 /// and from [kEnumPickerSearchFrom] choices a search field and the items'
 /// groups come in. A tap picks and closes.
+/// About the height of one row with its gap, for a first jump towards a far row.
+const kEnumOptionExtent = 66.0;
+
 class CustomEnumPickerSheet<T extends EnumItem> extends HookWidget {
   final String title;
   final String? question;
@@ -41,12 +44,25 @@ class CustomEnumPickerSheet<T extends EnumItem> extends HookWidget {
     final shown = filterEnumItems(items, query.value);
     final grouped = layout == EnumPickerLayout.search && items.any((item) => item.pickerGroup.isNotEmpty);
 
-    //* A tall list opens with the chosen row in view.
+    final scroll = useScrollController();
+
+    //* A tall list opens with the chosen row in view. A row far down is not built yet
+    //* (the list builds lazily): jump near it first, then bring it in exactly.
     useEffect(() {
       if (layout == EnumPickerLayout.short) return null;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      final index = items.indexOf(selected);
+      void reveal() {
         final target = selectedKey.currentContext;
         if (target != null && target.mounted) Scrollable.ensureVisible(target, alignment: 0.4);
+      }
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (selectedKey.currentContext == null && index > 0 && scroll.hasClients) {
+          scroll.jumpTo((index * kEnumOptionExtent).clamp(0, scroll.position.maxScrollExtent).toDouble());
+          WidgetsBinding.instance.addPostFrameCallback((_) => reveal());
+        } else {
+          reveal();
+        }
       });
       return null;
     }, const []);
@@ -101,6 +117,7 @@ class CustomEnumPickerSheet<T extends EnumItem> extends HookWidget {
 
     final list = ListView.separated(
       key: const ValueKey('enum-picker-list'),
+      controller: scroll,
       shrinkWrap: layout != EnumPickerLayout.search,
       padding: const EdgeInsets.only(bottom: 16),
       itemCount: rows.length,
