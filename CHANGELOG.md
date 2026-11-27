@@ -2,6 +2,14 @@
 
 All notable changes to this package. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the package uses [semantic versioning](https://semver.org/) (pre-1.0: a minor bump may break the API). Each version is a git tag (`vX.Y.Z`) with a GitHub release.
 
+## [0.2.1] - 2026-11-27
+### Fixed
+- `PageBody` declares the page gutter as applied only when its `padding` has a horizontal part; with a vertical-only padding its children apply the gutter themselves.
+### Changed
+- The four list widgets share one fade-in hook; the fade's animation is made once instead of on every build.
+### Removed
+- The unused `email_validator` dependency.
+
 ## [0.2.0] - 2026-11-26
 ### Added
 - `CustomIconBlock`: an icon on a rounded square in a `UiAccent`'s colour (default 44 px, radius `kControlRadius`), decorative for screen readers.

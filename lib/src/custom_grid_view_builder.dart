@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ui_kit/src/use_fade_in.dart';
 
 
 import 'package:ui_kit/ui_kit.dart';
@@ -30,19 +31,7 @@ class CustomGridViewBuilder extends HookWidget {
       return empty;
     }
 
-    final animationController = useAnimationController(duration: const Duration(milliseconds: 500));
-
-    final animation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: const Interval(0.1, 1.0, curve: Curves.easeOut),
-      ),
-    );
-
-    useEffect(() {
-      animationController.forward();
-      return null;
-    }, []);
+    final animation = useFadeIn();
 
     return GridView.builder(
       key: key,

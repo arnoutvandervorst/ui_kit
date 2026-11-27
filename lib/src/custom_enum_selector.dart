@@ -12,30 +12,10 @@ class CustomEnumSelector<T extends EnumItem> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> onTapHandler(T item) async {
-      /// When unrestricted, just call onTap
-      if (maxSelected == null) {
-        onTap?.call(item);
-        return;
-      }
-
-      /// When 1, just call onTap
-      if (maxSelected == 1) {
-        onTap?.call(item);
-        return;
-      }
-
-      /// When the item is already selected, call onTap
-      if (selected.contains(item)) {
-        onTap?.call(item);
-        return;
-      }
-
-      /// When the item is not selected and maxSelected is not reached, call onTap
-      if (maxSelected! > selected.length) {
-        onTap?.call(item);
-        return;
-      }
+    //* A tap always goes through, except on a new item once the maximum is reached.
+    void onTapHandler(T item) {
+      final max = maxSelected;
+      if (max == null || max == 1 || selected.contains(item) || max > selected.length) onTap?.call(item);
     }
 
     return Wrap(

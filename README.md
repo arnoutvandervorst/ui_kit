@@ -27,7 +27,7 @@ dependencies:
   ui_kit:
     git:
       url: https://github.com/arnoutvandervorst/ui_kit.git
-      ref: v0.1.1
+      ref: v0.2.1
 ```
 
 ```dart
@@ -37,7 +37,7 @@ void main() {
 }
 ```
 
-No native code: the kit depends only on Flutter, `material_ui`, `cupertino_ui`, `flutter_hooks` and `email_validator`.
+No native code: the kit depends only on Flutter, `material_ui`, `cupertino_ui` and `flutter_hooks`.
 
 ## Changes
 

@@ -1,6 +1,6 @@
 name: ui_kit
 description: The Custom widget layer for Flutter apps on material_ui / cupertino_ui - themed through tokens, worded through strings the app fills in.
-version: 0.2.0
+version: 0.2.1
 publish_to: none
 
 environment:
@@ -11,7 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_ui: ^1.1.1
-  email_validator: ^3.0.0
   flutter_hooks: ^0.21.3+1
   material_ui: ^1.4.0
 

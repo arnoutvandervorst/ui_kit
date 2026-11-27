@@ -26,10 +26,10 @@ class PageBody extends StatelessWidget {
             padding: padding,
             child: SizedBox(
               width: double.infinity,
-              //* Declares the gutter as applied, so descendants that would
+              //* Declares the gutter as applied (when [padding] has one), so descendants that would
               //* otherwise add their own (UserAuthTile, scroll paddings) fall
               //* back to 0 instead of doubling it.
-              child: GutterScope.applied(child: child),
+              child: GutterScope(isApplied: padding.horizontal > 0, child: child),
             ),
           ),
         ),
